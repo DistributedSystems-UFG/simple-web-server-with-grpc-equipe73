@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.iotservice";
+option java_outer_classname = "IoTServiceProto";
+option objc_class_prefix = "TEMP";
+
+package Sensor_service;
+
+service SensorService {
+  
+  // Create an Sensor record
+  rpc CreateSensor (SensorData) returns (StatusReply) {}
+  
+  // Get an Sensor´s data
+  rpc GetSensorDataFromdate (Sensordate) returns (SensorDataList) {}
+
+  rpc GetSensorDataFromlocation (Sensorlocation) returns (SensorDataList) {}
+
+  // List all Sensors
+  rpc ListAllSensors (EmptyMessage) returns (SensorDataList) {}
+  
+}
+
+message SensorData {
+  string date = 1;
+  string location = 2;
+  double value = 3;
+}
+
+message StatusReply {
+  string status = 1;
+}
+
+message Sensordate {
+  string date = 1;
+}
+message Sensorlocation {
+  string location = 1;
+}
+message EmptyMessage{}
+
+message SensorDataList{
+  repeated SensorData Sensor_data = 1;
+}
